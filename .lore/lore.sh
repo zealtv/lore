@@ -251,7 +251,7 @@ matches_content() {
   shift
   local term
   for term in "$@"; do
-    if grep -rIqF -- "$term" "$item/content" 2>/dev/null; then
+    if grep -rIiqF -- "$term" "$item/content" 2>/dev/null; then
       return 0
     fi
   done
