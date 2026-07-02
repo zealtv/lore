@@ -109,7 +109,10 @@ validate_stored_item() {
 }
 
 list_item_entries() {
-  find "$ITEMS_DIR" -mindepth 1 -maxdepth 1 ! -name '*.landing' -print | sort -r
+  # Items are directories (items/<id>/); `-type d` ignores stray files such as a
+  # `.gitkeep` used to track an empty store in git, or an incidental `.DS_Store`,
+  # so they are never mistaken for invalid items.
+  find "$ITEMS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name '*.landing' -print | sort -r
 }
 
 list_partials() {
