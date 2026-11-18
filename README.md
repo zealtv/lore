@@ -10,6 +10,7 @@ Copy `.lore/` into your project:
 
 ```sh
 git clone https://github.com/zealtv/lore
+mkdir -p my-project
 cp -R lore/.lore my-project/
 ```
 
