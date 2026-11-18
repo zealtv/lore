@@ -172,10 +172,6 @@ transcript writer or rotator. A live conversation system still owns coordination
 with its writer. After that system closes a transcript safely, it may prepare and
 keep the transcript as an ordinary lore item.
 
-An existing `transcript-archive/` can remain a producer or spool while that
-handoff is integrated. Lore should only replace its permanent-retention role once
-every memory-review and archive path has been updated.
-
 ## Permanence and backup
 
 Lore has no `drop`, `retire`, `expire`, or `sweep` command. Manual filesystem
