@@ -14,7 +14,7 @@ dest="$target/.lore"
 mkdir -p "$dest"
 cp -f "$REPO_DIR/.lore/lore.sh" "$dest/lore.sh"
 chmod +x "$dest/lore.sh"
-cp -f "$REPO_DIR/README.md" "$dest/README.md"
+cp -f "$REPO_DIR/.lore/README.md" "$dest/README.md"
 "$dest/lore.sh" init
 
 echo "installed $dest"
