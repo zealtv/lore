@@ -185,19 +185,14 @@ durable lore must copy the complete `items/` tree to another failure domain—su
 as a private remote, filesystem snapshots, or replicated storage—and test that it
 can restore it. `INDEX.md` is disposable; `items/` is the asset.
 
-## Vendoring
+## Installing and upgrading
 
-Copy the script and README into a project's `.lore/` directory, then initialize
-the store:
-
-```sh
-mkdir -p <project>/.lore
-cp .lore/lore.sh .lore/README.md <project>/.lore/
-<project>/.lore/lore.sh init
-```
+To install lore, copy the `.lore/` directory into the project. To upgrade, run
+`install.sh` from a lore checkout: it refreshes `lore.sh` and `README.md`,
+seeds a missing `items/` and `INDEX.md`, and leaves `items/` alone.
 
 `lore.sh` resolves all state relative to the `.lore/` directory it lives in, so
-each vendored copy is self-contained. Its small title/description extraction,
+each copy is self-contained. Its small title/description extraction,
 fixed-string search, and atomic-index mechanics intentionally resemble glean but
 are copied locally: neither protocol depends on a shared runtime component.
 

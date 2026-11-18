@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # usage: ./install.sh <host-dir>
-# Lays down a .lore/ at the host directory — a sanctioned standalone install
-# for scopes not delivered by any bundle. Idempotent: re-running repairs
-# lore.sh and README.md and re-seeds missing trays (via lore.sh init); it
-# never touches items.
+# Upgrades the .lore/ at the host directory (it also makes one if absent).
+# To install, copy the .lore/ directory; this script is the upgrade path.
+# It refreshes what lore ships (lore.sh, README.md), seeds what is absent
+# (items/ and INDEX.md, via lore.sh init), and never touches items or an
+# existing INDEX.md. Re-running changes nothing.
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -12,9 +13,12 @@ target="${1:?usage: install.sh <host-dir>}"
 
 dest="$target/.lore"
 mkdir -p "$dest"
-cp -f "$REPO_DIR/.lore/lore.sh" "$dest/lore.sh"
+# Source and destination can be the same file (./install.sh .): skip the copy.
+[ "$REPO_DIR/.lore/lore.sh" -ef "$dest/lore.sh" ] ||
+  cp -f "$REPO_DIR/.lore/lore.sh" "$dest/lore.sh"
 chmod +x "$dest/lore.sh"
-cp -f "$REPO_DIR/.lore/README.md" "$dest/README.md"
+[ "$REPO_DIR/.lore/README.md" -ef "$dest/README.md" ] ||
+  cp -f "$REPO_DIR/.lore/README.md" "$dest/README.md"
 "$dest/lore.sh" init
 
 echo "installed $dest"
